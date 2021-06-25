@@ -2,9 +2,14 @@
   "name": "api-utils",
   "version": "1.0.0",
   "description": "Some utilities to ease API creation in NEXTJS projects",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "prepare": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -15,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/DanielMateosLab/api-utils/issues"
   },
-  "homepage": "https://github.com/DanielMateosLab/api-utils#readme"
+  "homepage": "https://github.com/DanielMateosLab/api-utils#readme",
+  "dependencies": {
+    "typescript": "^4.3.4"
+  }
 }
