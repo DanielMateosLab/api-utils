@@ -1,5 +1,5 @@
 {
-  "name": "api-utils",
+  "name": "@danielmat/api-utils",
   "version": "1.0.0",
   "description": "Some utilities to ease API creation in NextJs projects",
   "main": "dist/index.js",
