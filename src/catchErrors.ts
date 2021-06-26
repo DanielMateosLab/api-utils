@@ -3,8 +3,9 @@ import { NextApiHandler } from "next/types/index";
 import { ErrorResponse } from "./types";
 import ValidationError from "yup/lib/ValidationError";
 
-const catchErrors = (handler: NextApiHandler<any>) =>
-  (async (req, res) => {
+const catchErrors =
+  (handler: NextApiHandler): NextApiHandler =>
+  async (req, res) => {
     try {
       await handler(req, res);
     } catch (e) {
@@ -15,15 +16,15 @@ const catchErrors = (handler: NextApiHandler<any>) =>
           name: e.name,
           message: "Validation Error",
           fieldErrors: yupToFormErrors(e),
-        });
+        } as ErrorResponse<{}>);
       }
 
       return res.status(e.statusCode || 500).json({
         status: "error",
         name: e.name || "InternalServerError",
         message: e.message || "Internal Server Error",
-      });
+      } as ErrorResponse<{}>);
     }
-  }) as NextApiHandler<ErrorResponse<{}>>;
+  };
 
 export default catchErrors;
