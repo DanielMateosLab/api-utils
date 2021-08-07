@@ -11,19 +11,17 @@ const catchErrors =
     } catch (e) {
       console.error(e);
       if (e instanceof ValidationError) {
-        return res.status(400).json({
-          status: "error",
-          name: e.name,
+        const body: ErrorResponse<{}> = {
           message: "Validation Error",
           fieldErrors: yupToFormErrors(e),
-        } as ErrorResponse<{}>);
+        };
+        return res.status(400).json(body);
       }
 
-      return res.status(e.statusCode || 500).json({
-        status: "error",
-        name: e.name || "InternalServerError",
+      const body: ErrorResponse = {
         message: e.message || "Internal Server Error",
-      } as ErrorResponse<{}>);
+      };
+      return res.status(e.statusCode || 500).json(body);
     }
   };
 
